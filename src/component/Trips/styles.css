@@ -1,0 +1,26 @@
+.trip-item{
+    margin: 10px 0;
+    padding: 15px 20px;
+    background-color: #f5f5f5;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.destination{
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.details{
+    font-style: italic;
+    color: #999;
+}
+
+.price{
+    font-size: 18px;
+    font-weight: 700;
+    white-space: nowrap;
+    color: orangered;
+}

@@ -1,40 +1,61 @@
 // @flow
 
-import React from 'react'
-import {
-  FormGroup,
-  FormControl,
-  ControlLabel,
-  ButtonGroup,
-  Button,
-} from 'react-bootstrap'
+import React, { Component } from 'react'
 
-import './styles.css'
+import FormInput from '../FormInput'
+import FormRadio from '../FormRadio'
+import FormButton from '../FormButton'
 
-const Form = () =>
-  <form>
-    <FormGroup>
-      <ControlLabel>From</ControlLabel>
-      <FormControl />
-    </FormGroup>
-    <FormGroup>
-      <ControlLabel>To</ControlLabel>
-      <FormControl />
-    </FormGroup>
-    <FormGroup>
-      <ButtonGroup justified>
-        <Button href="#">Cheapest</Button>
-        <Button href="#">Fastest</Button>
-      </ButtonGroup>
-    </FormGroup>
-    <Button
-      type="submit"
-      bsSize="large"
-      bsStyle="primary"
-      block
-    >
-      <i className="glyphicon glyphicon-search" /> Search
-    </Button>
-  </form>
+type Props = {
+
+}
+
+class Form extends Component {
+  constructor(props: Props) {
+    super(props)
+
+    this.state = {
+      isResult: false,
+    }
+  }
+
+  state: {
+    isResult: boolean,
+  }
+
+  handleSubmit(e: Event) {
+    e.preventDefault();
+    console.log('ok')
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <h2>Select your trip</h2>
+        <FormInput
+          controlId="from"
+          label="From"
+        />
+        <FormInput
+          controlId="to"
+          label="To"
+        />
+        <FormRadio
+          options={[
+        {label: 'Cheapest'},
+        {label: 'Fastest'},
+      ]}
+        />
+        <FormButton
+          type="submit"
+          bsStyle="primary"
+          label="Search"
+          icon="search"
+        />
+      </form>
+    )
+  }
+}
+
 
 export default Form
