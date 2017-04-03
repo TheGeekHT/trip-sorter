@@ -36,7 +36,7 @@ class Trips extends Component {
                 It will take around <strong>{item.duration.h}h {item.duration.m}m</strong> by <strong>{item.transport}</strong>
                 </div>
             </div>
-            <div className="price">{item.cost} {currency}</div>
+            <div className="price">{item.discount ? item.cost * item.discount / 100 : item.cost} {currency}</div>
           </div>
           )
         }

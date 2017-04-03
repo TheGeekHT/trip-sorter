@@ -28,7 +28,7 @@ class App extends Component {
       <div className="app">
         <Header>Trip sorter</Header>
         <div className="app-content container">
-          <Form />
+          <Form trips={data.deals} />
           <Trips trips={data.deals} currency={data.currency} />
         </div>
       </div>
