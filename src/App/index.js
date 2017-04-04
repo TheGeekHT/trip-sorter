@@ -39,8 +39,6 @@ class App extends Component {
   // FIXME: uncomment event method
   findBestTrip(e: Event) {
     // e.preventDefault()
-    console.log('ok', this.state)
-
     const { deals, from, to, type } = this.state
     const BestTrip = new PathFinder(deals, from, to, type)
     BestTrip.find()
