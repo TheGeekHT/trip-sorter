@@ -5,6 +5,8 @@ import './styles.css'
 
 import DataFromServer from '../../api/response.json'
 
+import PathFinder from '../util/path-finder'
+
 import Header from '../component/Header'
 import Form from '../component/Form'
 import Trips from '../component/Trips'
@@ -14,25 +16,54 @@ class App extends Component {
     super()
 
     this.state = {
-      data: DataFromServer,
-      currency: DataFromServer.currency,
-      trips: [
-        DataFromServer.deals[0],
-        DataFromServer.deals[1],
-      ],
-      from: '',
-      to: ''
+      deals: [],
+      currency: '',
+      trips: [],
+      // FIXME: just for testing
+      from: 'Moscow',
+      to: 'Kiev',
+      type: 'cheapest'
+      // FIXME: end ------------
     }
   }
 
   state: {
-    data: Object,
+    deals: Array<Object>,
     currency: string,
     trips: Array<Object>,
+    from: string,
+    to: string,
+    type: string,
+  }
+
+  // FIXME: uncomment event method
+  findBestTrip(e: Event) {
+    // e.preventDefault()
+    console.log('ok', this.state)
+
+    const { deals, from, to, type } = this.state
+    const BestTrip = new PathFinder(deals, from, to, type)
+    BestTrip.find()
+  }
+
+  // faking API response here
+  fakeApiCall() {
+    return {
+      response: DataFromServer
+    }
+  }
+
+  componentWillMount() {
+    const serverResponse = this.fakeApiCall().response
+
+    this.setState({
+      deals: serverResponse.deals,
+      currency: serverResponse.currency,
+    })
   }
 
   render() {
-    const { data, trips } = this.state
+    const { trips } = this.state
     return (
       <div className="app">
         <Header>Trip sorter</Header>
@@ -40,7 +71,7 @@ class App extends Component {
           {
             trips.length ?
               <Trips {...this.state} /> :
-              <Form trips={data.deals} />
+              <Form handleSubmit={this.findBestTrip.bind(this)} {...this.state} />
           }
         </div>
       </div>

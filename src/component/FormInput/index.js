@@ -13,7 +13,7 @@ type Props = {
   label?: string,
 }
 
-const FormInput = ({ controlId, placeholder, label }: Props) =>
+const FormInput = ({ controlId, placeholder, label, value }: Props) =>
   <FormGroup
     controlId={controlId}
   >
