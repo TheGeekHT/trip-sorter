@@ -14,22 +14,34 @@ class App extends Component {
     super()
 
     this.state = {
-      data: DataFromServer
+      data: DataFromServer,
+      currency: DataFromServer.currency,
+      trips: [
+        DataFromServer.deals[0],
+        DataFromServer.deals[1],
+      ],
+      from: '',
+      to: ''
     }
   }
 
   state: {
     data: Object,
+    currency: string,
+    trips: Array<Object>,
   }
 
   render() {
-    const { data } = this.state
+    const { data, trips } = this.state
     return (
       <div className="app">
         <Header>Trip sorter</Header>
         <div className="app-content container">
-          <Form trips={data.deals} />
-          <Trips trips={data.deals} currency={data.currency} />
+          {
+            trips.length ?
+              <Trips {...this.state} /> :
+              <Form trips={data.deals} />
+          }
         </div>
       </div>
     )

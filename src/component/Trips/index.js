@@ -2,7 +2,8 @@
 
 import React, { Component } from 'react'
 
-import './styles.css'
+import TripsResult from '../TripsResult'
+import Trip from '../Trip'
 
 type Props = {
   trips: Array<any>,
@@ -12,38 +13,23 @@ type Props = {
 class Trips extends Component {
   constructor(props: Props) {
     super(props)
-
-    this.state = {
-      isResult: false,
-    }
-  }
-
-  state: {
-    isResult: boolean,
   }
 
   render() {
     const { trips, currency } = this.props
     return (
       <div>
-        <h2>The fastest trip</h2>
+        <TripsResult title="The fastest route">
+          Some content...
+        </TripsResult>
         {
           trips.map((item, index) =>
-          <div className="trip-item" key={`${index}-${item.reference}`}>
-            <div>
-              <div className="destination">{item.departure} - {item.arrival}</div>
-              <div className="details">
-                It will take around <strong>{item.duration.h}h {item.duration.m}m</strong> by <strong>{item.transport}</strong>
-                </div>
-            </div>
-            <div className="price">{item.discount ? item.cost * item.discount / 100 : item.cost} {currency}</div>
-          </div>
+            <Trip item={item} currency={currency} key={`${index}-${item.reference}`} />
           )
         }
       </div>
     )
   }
 }
-
 
 export default Trips
