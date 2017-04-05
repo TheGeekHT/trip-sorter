@@ -13,7 +13,7 @@ import Trips from '../component/Trips'
 
 class App extends Component {
   constructor() {
-    super()
+    super();
 
     this.state = {
       deals: [],
@@ -21,7 +21,7 @@ class App extends Component {
       trips: [],
       // FIXME: just for testing
       from: 'Moscow',
-      to: 'Kiev',
+      to: 'London',
       type: 'cheapest'
       // FIXME: end ------------
     }
@@ -34,14 +34,14 @@ class App extends Component {
     from: string,
     to: string,
     type: string,
-  }
+  };
 
   // FIXME: uncomment event method
   findBestTrip(e: Event) {
     // e.preventDefault()
-    const { deals, from, to, type } = this.state
-    const BestTrip = new PathFinder(deals, from, to, type)
-    BestTrip.find()
+    const { deals, from, to, type } = this.state;
+    const BestTrip = new PathFinder(deals, from, to, type);
+    console.log(BestTrip.find());
   }
 
   // faking API response here
@@ -52,7 +52,7 @@ class App extends Component {
   }
 
   componentWillMount() {
-    const serverResponse = this.fakeApiCall().response
+    const serverResponse = this.fakeApiCall().response;
 
     this.setState({
       deals: serverResponse.deals,
@@ -61,7 +61,7 @@ class App extends Component {
   }
 
   render() {
-    const { trips } = this.state
+    const { trips } = this.state;
     return (
       <div className="app">
         <Header>Trip sorter</Header>
