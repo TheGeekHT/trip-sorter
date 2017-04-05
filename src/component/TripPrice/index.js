@@ -10,6 +10,6 @@ type Props = {
 }
 
 const TripPrice = ({ item, currency }: Props) =>
-  <div className="price">{item.discount ? item.cost * item.discount / 100 : item.cost} {currency}</div>
+  <div className="price">{ item.cost * (1 - (item.discount / 100)) } {currency}</div>
 
 export default TripPrice
