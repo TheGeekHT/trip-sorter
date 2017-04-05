@@ -12,11 +12,13 @@ type Props = {
   placeholder?: string,
   label?: string,
   value?: string,
+  validationState: string,
 }
 
-const FormInput = ({ controlId, placeholder, label, value }: Props) =>
+const FormInput = ({ controlId, placeholder, label, value, validationState }: Props) =>
   <FormGroup
     controlId={controlId}
+    validationState={validationState}
   >
     <ControlLabel>{label}</ControlLabel>
     <FormControl

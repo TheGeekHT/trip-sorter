@@ -19,6 +19,7 @@ class App extends Component {
       deals: [],
       tripRefMap: {},
       currency: '',
+      citiesList: [],
       trips: [],
       from: '',
       to: '',
@@ -30,6 +31,7 @@ class App extends Component {
     deals: Array<Object>,
     tripRefMap: Object,
     currency: string,
+    citiesList: Array<string>,
     trips: Array<Object>,
     from: string,
     to: string,
@@ -43,6 +45,9 @@ class App extends Component {
   resetFilter() {
     this.setState({
       trips: [],
+      from: '',
+      to: '',
+      type: ''
     })
   }
 
@@ -63,6 +68,27 @@ class App extends Component {
     return map;
   }
 
+  static createCitiesList(deals: Array<Object>) {
+    let addedList = [];
+    let list = [];
+
+    const addCity = (city) => {
+      if(addedList.indexOf(city) === -1) {
+        addedList.push(city);
+        list.push(city);
+      }
+    };
+
+    deals.forEach(item => {
+      addCity(item.departure);
+      addCity(item.arrival);
+    });
+
+    list.sort();
+
+    return list;
+  }
+
   // faking API response here
   static fakeApiCall() {
     return {
@@ -71,9 +97,10 @@ class App extends Component {
   }
 
   componentWillMount() {
-    const { deals, currency } = this.constructor.fakeApiCall().response;
+    const { deals, currency } = this.constructor.fakeApiCall().response; // must be async Promise handler in real conditions
     const tripRefMap = this.constructor.createTripRefMap(deals);
-    this.setState({ deals, tripRefMap, currency });
+    const citiesList = this.constructor.createCitiesList(deals);
+    this.setState({ deals, tripRefMap, currency, citiesList });
   }
 
   render() {

@@ -11,9 +11,7 @@ type Props = {
 }
 
 const TripsResult = ({ title, children }: Props) => {
-  const titleWrapper = (
-    <h3>{title}</h3>
-  )
+  const titleWrapper = <h3>{title}</h3>
 
   return (
     <div>
