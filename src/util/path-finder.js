@@ -51,7 +51,7 @@ class FindBestTrip {
     let nodes = new PriorityQueue();
     let dist = {};
     let prev = {};
-    let vertex, path;
+    let vertex;
 
     for (vertex in Graph) {
       if (Graph.hasOwnProperty(vertex)) {
