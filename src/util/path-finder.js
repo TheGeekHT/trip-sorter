@@ -15,6 +15,7 @@ class FindBestTrip {
     this.type = TYPE;
   }
 
+  // build correct Graph for Dijkstra algorithm
   static createVertices(data: Array<Object>, type: string) {
     let vertices: Object = {}; // put all our nodes and weights here
 
@@ -46,14 +47,17 @@ class FindBestTrip {
     return vertices
   }
 
+  // Dijkstra algorithm to find shortest path
   static runDijkstra(Graph, from ,to) {
-    console.log(Graph);
     let nodes = new PriorityQueue();
     let dist = {};
     let prev = {};
-    let vertex;
+    let refTripMap = {};
 
-    for (vertex in Graph) {
+    // Assign initial values:
+    // 0 - for departure city
+    // infinity - for all other nodes
+    for (let vertex in Graph) {
       if (Graph.hasOwnProperty(vertex)) {
         if (vertex === from) {
           dist[vertex] = 0;
@@ -73,6 +77,7 @@ class FindBestTrip {
       // exit if we reached destination
       if (u === to) break;
 
+      // continue if we've got nodes to check
       if (!u || dist[u] === Infinity) continue;
 
       // v - current TO node
@@ -83,23 +88,26 @@ class FindBestTrip {
             dist[v] = alt;
             prev[v] = u;
             nodes.add(v, alt);
+            refTripMap[`${u}-${v}`] = Graph[u][v].ref;
           }
         }
       }
     }
 
-    return { prev }
+    return { prev, refTripMap }
   }
 
   static getBestTrip(dijkstraOutput, to) {
     let trips = [];
-    let departure = dijkstraOutput.prev[to];
+    let arrival = to;
+    let departure = dijkstraOutput.prev[arrival];
 
-    trips.push(to);
     while (departure) {
-      trips.push(departure);
+      trips.push(dijkstraOutput.refTripMap[`${departure}-${arrival}`]);
+      arrival = departure;
       departure = dijkstraOutput.prev[departure];
     }
+
     return trips.reverse();
   }
 

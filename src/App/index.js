@@ -17,18 +17,20 @@ class App extends Component {
 
     this.state = {
       deals: [],
+      tripRefMap: {},
       currency: '',
       trips: [],
       // FIXME: just for testing
-      from: 'Moscow',
-      to: 'London',
-      type: 'cheapest'
+      from: 'Prague',
+      to: 'Budapest',
+      type: 'fastest'
       // FIXME: end ------------
     }
   }
 
   state: {
     deals: Array<Object>,
+    tripRefMap: Object,
     currency: string,
     trips: Array<Object>,
     from: string,
@@ -36,28 +38,44 @@ class App extends Component {
     type: string,
   };
 
+  parseBestTrip(refs: Array<string>) {
+    let trips: Array<Object> = [];
+    refs.forEach(ref => trips.push(this.state.tripRefMap[ref]));
+    this.setState({
+      trips
+    });
+  }
+
   // FIXME: uncomment event method
   findBestTrip(e: Event) {
     // e.preventDefault()
     const { deals, from, to, type } = this.state;
-    const BestTrip = new PathFinder(deals, from, to, type);
-    console.log(BestTrip.find());
+    const BestTrip = (new PathFinder(deals, from, to, type)).find();
+    this.parseBestTrip(BestTrip)
+  }
+
+  static createTripRefMap(deals: Array<Object>) {
+    let map = {};
+    deals.forEach(item => map[item.reference] = item);
+    return map;
   }
 
   // faking API response here
-  fakeApiCall() {
+  static fakeApiCall() {
     return {
       response: DataFromServer
     }
   }
 
   componentWillMount() {
-    const serverResponse = this.fakeApiCall().response;
+    const { deals, currency } = this.constructor.fakeApiCall().response;
+    const tripRefMap = this.constructor.createTripRefMap(deals);
 
     this.setState({
-      deals: serverResponse.deals,
-      currency: serverResponse.currency,
-    })
+      deals,
+      tripRefMap,
+      currency,
+    });
   }
 
   render() {

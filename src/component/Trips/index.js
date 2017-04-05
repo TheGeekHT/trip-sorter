@@ -24,7 +24,7 @@ class Trips extends Component {
         </TripsResult>
         {
           trips.map((item, index) =>
-            <Trip item={item} currency={currency} key={`${index}-${item.reference}`} />
+            <Trip item={item} currency={currency} key={`${item.reference}`} />
           )
         }
       </div>
