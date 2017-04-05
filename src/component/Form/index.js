@@ -11,13 +11,28 @@ type Props = {
 }
 
 class Form extends Component {
+  validate: Function;
+
   constructor(props: Props) {
-    super(props)
+    super(props);
+
+    this.validate = this.validate.bind(this);
+  }
+
+  validate(e: Event) {
+    e.preventDefault();
+
+    const formData = this.refs.data;
+    const from = formData.from.value;
+    const to = formData.to.value;
+    const type = formData.type.value;
+
+    this.props.handleSubmit({ from, to, type });
   }
 
   render() {
     return (
-      <form ref='from' onSubmit={this.props.handleSubmit}>
+      <form ref='data' onSubmit={this.validate}>
         <h2>Select your trip</h2>
         <FormInput
           controlId="from"
@@ -29,9 +44,9 @@ class Form extends Component {
         />
         <FormRadio
           options={[
-        {label: 'Cheapest', value: 'cheapest'},
-        {label: 'Fastest', value: 'fastest'},
-      ]}
+                    {label: 'Cheapest', value: 'cheapest'},
+                    {label: 'Fastest', value: 'fastest'},
+                  ]}
         />
         <FormButton
           type="submit"

@@ -11,6 +11,7 @@ type Props = {
   controlId: string,
   placeholder?: string,
   label?: string,
+  value?: string,
 }
 
 const FormInput = ({ controlId, placeholder, label, value }: Props) =>
@@ -21,6 +22,7 @@ const FormInput = ({ controlId, placeholder, label, value }: Props) =>
     <FormControl
       type="text"
       placeholder={placeholder}
+      value={value}
     />
   </FormGroup>
 
