@@ -21,8 +21,8 @@ class App extends Component {
       currency: '',
       trips: [],
       // FIXME: just for testing
-      from: 'Prague',
-      to: 'Budapest',
+      from: 'Paris',
+      to: 'Amsterdam',
       type: 'fastest'
       // FIXME: end ------------
     }
@@ -46,9 +46,7 @@ class App extends Component {
     });
   }
 
-  // FIXME: uncomment event method
-  findBestTrip(e: Event) {
-    // e.preventDefault()
+  findBestTrip() {
     const { deals, from, to, type } = this.state;
     const BestTrip = (new PathFinder(deals, from, to, type)).find();
     this.parseBestTrip(BestTrip)
@@ -58,6 +56,21 @@ class App extends Component {
     let map = {};
     deals.forEach(item => map[item.reference] = item);
     return map;
+  }
+
+  handleSubmit(e: Event) {
+    e.preventDefault()
+    console.log(this);
+  }
+
+  resetFilter() {
+    console.log('a');
+    this.setState({
+      trips: [],
+      from: '',
+      to: '',
+      type: 'cheapest',
+    })
   }
 
   // faking API response here
@@ -86,8 +99,8 @@ class App extends Component {
         <div className="app-content container">
           {
             trips.length ?
-              <Trips {...this.state} /> :
-              <Form handleSubmit={this.findBestTrip.bind(this)} {...this.state} />
+              <Trips handleReset={this.resetFilter.bind(this)} {...this.state} /> :
+              <Form handleSubmit={this.handleSubmit.bind(this)} {...this.state} />
           }
         </div>
       </div>

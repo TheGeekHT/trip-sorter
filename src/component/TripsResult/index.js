@@ -17,7 +17,7 @@ const TripsResult = ({ title, children }: Props) => {
 
   return (
     <div>
-      <Panel header={titleWrapper} bsStyle="info">
+      <Panel header={titleWrapper}>
         {children}
       </Panel>
     </div>

@@ -15,11 +15,6 @@ class Form extends Component {
     super(props)
   }
 
-  // FIXME: remove later / just for testing
-  componentDidMount() {
-    this.props.handleSubmit()
-  }
-
   render() {
     return (
       <form ref='from' onSubmit={this.props.handleSubmit}>
@@ -34,8 +29,8 @@ class Form extends Component {
         />
         <FormRadio
           options={[
-        {label: 'Cheapest'},
-        {label: 'Fastest'},
+        {label: 'Cheapest', value: 'cheapest'},
+        {label: 'Fastest', value: 'fastest'},
       ]}
         />
         <FormButton
