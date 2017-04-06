@@ -56,9 +56,11 @@ class Form extends Component {
 
     const { citiesList } = this.props;
 
+    const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+
     const formData = this.refs.data;
-    const from = formData.from.value;
-    const to = formData.to.value;
+    const from = capitalize(formData.from.value);
+    const to = capitalize(formData.to.value);
     const type = formData.type.value;
 
     let errors = [];
