@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { Navbar } from 'react-bootstrap'
+
 import './styles.css'
 
 type Props = {
@@ -9,9 +10,9 @@ type Props = {
 }
 
 const Header = ({ children }: Props) =>
-  <Navbar fixedTop>
-    <Navbar.Header>
-      <Navbar.Brand className="title">{children}</Navbar.Brand>
+  <Navbar fixedTop className="nav">
+    <Navbar.Header className="title">
+      {children}
     </Navbar.Header>
   </Navbar>
 

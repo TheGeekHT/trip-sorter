@@ -4,12 +4,12 @@ import React, { Component } from 'react'
 import './styles.css'
 
 import DataFromServer from '../../api/response.json'
-
 import PathFinder from '../util/path-finder'
 
 import Header from '../component/Header'
 import Form from '../component/Form'
 import Trips from '../component/Trips'
+import Icon from '../component/Icon'
 
 class App extends Component {
   constructor() {
@@ -109,7 +109,7 @@ class App extends Component {
     const { trips, loading } = this.state;
     return (
       <div className="app">
-        <Header>Trip sorter</Header>
+        <Header><Icon type="send" /> tripsorter</Header>
         <div className="app-content container">
           {
             loading ?

@@ -123,8 +123,8 @@ class Form extends Component {
         />
         <FormButton
           type="submit"
-          bsStyle="primary"
-          label="Search"
+          bsStyle="success"
+          label="SEARCH"
           icon="search"
         />
         { errors.length ? <FormError title="ERROR" errors={errors}/> : '' }

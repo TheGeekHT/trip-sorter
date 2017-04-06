@@ -5,6 +5,8 @@ import { Panel } from 'react-bootstrap'
 
 import Icon from '../Icon'
 
+import './styles.css'
+
 type Props = {
   title: string,
   errors?: Array<string>,
@@ -16,8 +18,8 @@ const FormError = ({title, errors}: Props) => {
 
   return (
     <Panel header={titleWrapper} bsStyle="danger">
-      <ul>
-        {errors ? errors.map((err, i) => <li key={i}>{err}</li>) : '' }
+      <ul className="errors">
+        {errors ? errors.map((err, i) => <li className="error" key={i}>{err}</li>) : '' }
       </ul>
     </Panel>
   )
