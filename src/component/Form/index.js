@@ -123,9 +123,9 @@ class Form extends Component {
         />
         <FormButton
           type="submit"
-          bsStyle="success"
+          bsStyle="info"
           label="SEARCH"
-          icon="search"
+          icon="glyphicon glyphicon-search"
         />
         { errors.length ? <FormError title="ERROR" errors={errors}/> : '' }
       </form>

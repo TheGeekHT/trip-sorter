@@ -3,10 +3,11 @@
 import React from 'react'
 
 type Props = {
-  type: string
+  type: string,
 }
 
 const Icon = ({ type }: Props) =>
-  <i className={`glyphicon glyphicon-${type}`} />
+  <i className={type} />
+
 
 export default Icon

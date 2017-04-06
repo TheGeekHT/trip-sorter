@@ -21,7 +21,7 @@ body {
 
 /* Loader */
 .loader {
-    color: #555;
+    color: #5bc0de;
     font-size: 60px;
     text-indent: -9999em;
     overflow: hidden;

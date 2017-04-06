@@ -1,8 +1,8 @@
 // @flow
 
 import React, { Component } from 'react'
-
 import { Button } from 'react-bootstrap'
+
 import TripsResult from '../TripsResult'
 import Trip from '../Trip'
 
@@ -75,14 +75,17 @@ class Trips extends Component {
           <p>
             Your journey from <strong className="destination">{from}</strong> to <strong className="destination">{to}</strong> will take around <strong>{time}</strong> and will cost you about <strong className="price">{cost}</strong>.
           </p>
-          <p>You'll have to travel by <strong>{transport}</strong>{stops}.</p>
+          <p>
+            You'll have to travel by <strong>{transport}</strong>{stops}.
+          </p>
           <p>
             <Button bsSize="large" bsStyle="info" onClick={this.props.handleReset}>Select new trip</Button> or see the detailed trip below.
           </p>
         </TripsResult>
-        {
-          trips.map((item, index) => <Trip item={item} currency={currency} key={`${item.reference}`} />)
-        }
+        <div className="trip-wrapper">
+          { trips.map((item, index) => <Trip item={item} currency={currency} key={`${item.reference}`} />) }
+          <Trip item={trips[trips.length-1]} title={trips[trips.length-1].arrival} currency={currency} />
+        </div>
       </div>
     )
   }

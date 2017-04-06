@@ -1,25 +1,68 @@
 // @flow
 
-import React from 'react'
+import React, { Component } from 'react'
 
-import TripCities from '../TripCities'
-import TripDetails from '../TripDetails'
-import TripPrice from '../TripPrice'
+import Icon from '../Icon'
 
 import './styles.css'
 
 type Props = {
   item: Object,
   currency: string,
+  title?: string,
 }
 
-const Trip = ({ item, currency }: Props) =>
-  <div className="trip-item">
-    <div>
-      <TripCities item={item} />
-      <TripDetails item={item} />
-    </div>
-    <TripPrice item={item} currency={currency} />
-  </div>
+class Trip extends Component {
+  state: {
+    title: string,
+    cost: string,
+    time: string,
+    transport: string,
+  };
+
+  constructor(props: Props) {
+    super(props);
+
+    this.state = {
+      title: '',
+      cost: '',
+      time: '',
+      transport: '',
+    }
+  }
+
+  componentWillMount() {
+    const { item, currency } = this.props;
+    const title = this.props.title ? this.props.title : this.props.item.departure;
+
+    const cost = `${item.cost * (1 - (item.discount / 100))} ${currency}`;
+
+    const time = `${item.duration.h}:${item.duration.m}`;
+
+    const transport = item.transport;
+
+    this.setState({ title, cost, time, transport })
+  }
+
+  render() {
+    const { title, cost, time, transport } = this.state;
+    return (
+      <div className="trip-item">
+        <div className="trip-item-title destination">{title}</div>
+        {
+          this.props.title ? '' :
+            <div className="trip-item-details">
+              <div className="trip-item-details-transport">
+                <Icon type={`fa fa-fw fa-${transport}`} />
+              </div>
+              <div>
+                <Icon type="glyphicon glyphicon-time" /> {time} &mdash; <span className="price">{cost}</span>
+                </div>
+            </div>
+        }
+      </div>
+    )
+  }
+}
 
 export default Trip

@@ -98,7 +98,7 @@ class App extends Component {
     const { trips, loading } = this.state;
     return (
       <div className="app">
-        <Header><Icon type="send" /> tripsorter</Header>
+        <Header><Icon type="glyphicon glyphicon-send" /> tripsorter</Header>
         <div className="app-content container">
           {
             loading ?

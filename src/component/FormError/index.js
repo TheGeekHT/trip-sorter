@@ -14,7 +14,7 @@ type Props = {
 
 
 const FormError = ({title, errors}: Props) => {
-  const titleWrapper = <h2><Icon type="exclamation-sign" /> <strong>{title}</strong></h2>;
+  const titleWrapper = <h2><Icon type="glyphicon glyphicon-exclamation-sign" /> <strong>{title}</strong></h2>;
 
   return (
     <Panel header={titleWrapper} bsStyle="danger">
