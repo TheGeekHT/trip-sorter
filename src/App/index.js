@@ -23,7 +23,8 @@ class App extends Component {
       trips: [],
       from: '',
       to: '',
-      type: ''
+      type: '',
+      loading: false,
     }
   }
 
@@ -36,10 +37,11 @@ class App extends Component {
     from: string,
     to: string,
     type: string,
+    loading: boolean,
   };
 
   handleSubmit({ from, to, type }: Object) {
-    this.setState({ from, to, type }, this.findBestTrip);
+    this.setState({ from, to, type, loading: true }, this.findBestTrip);
   }
 
   resetFilter() {
@@ -54,7 +56,7 @@ class App extends Component {
   parseBestTrip(refs: Array<string>) {
     let trips: Array<Object> = [];
     refs.forEach(ref => trips.push(this.state.tripRefMap[ref]));
-    this.setState({ trips });
+    this.setState({ trips, loading: false });
   }
 
   findBestTrip() {
@@ -104,15 +106,17 @@ class App extends Component {
   }
 
   render() {
-    const { trips } = this.state;
+    const { trips, loading } = this.state;
     return (
       <div className="app">
         <Header>Trip sorter</Header>
         <div className="app-content container">
           {
-            trips.length ?
-              <Trips handleReset={this.resetFilter.bind(this)} {...this.state} /> :
-              <Form ref="form" handleSubmit={this.handleSubmit.bind(this)} {...this.state} />
+            loading ?
+              <div className="loader">Loading...</div> :
+              (trips.length ?
+                <Trips handleReset={this.resetFilter.bind(this)} {...this.state} /> :
+                <Form ref="form" handleSubmit={this.handleSubmit.bind(this)} {...this.state} />)
           }
         </div>
       </div>
