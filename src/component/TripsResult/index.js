@@ -7,20 +7,12 @@ import './styles.css'
 
 type Props = {
   children?: typeof React.PropTypes.node,
-  title: string,
 }
 
-const TripsResult = ({ title, children }: Props) => {
-  const titleWrapper = <h3>{title}</h3>
-
-  return (
-    <div>
-      <Panel header={titleWrapper}>
-        {children}
-      </Panel>
-    </div>
-  )
-}
+const TripsResult = ({ children }: Props) =>
+  <Panel bsStyle="info" className="result">
+    {children}
+  </Panel>
 
 
 export default TripsResult

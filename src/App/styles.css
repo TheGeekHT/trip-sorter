@@ -12,6 +12,13 @@ body {
     margin-top: 70px;
 }
 
+.destination{
+    color: #5bc0de;
+}
+.price{
+    color: orangered;
+}
+
 /* Loader */
 .loader {
     color: #555;

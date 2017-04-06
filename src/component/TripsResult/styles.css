@@ -1,0 +1,16 @@
+.result {
+    font-size: 20px;
+    padding: 15px 0;
+    line-height: 1.5em;
+}
+
+.result p {
+    margin-bottom: 25px;
+}
+.result p:last-child {
+    margin-bottom: 0;
+}
+
+.result strong{
+    white-space: nowrap;
+}

@@ -9,25 +9,75 @@ import Trip from '../Trip'
 type Props = {
   trips: Array<any>,
   currency: string,
-  type: string,
   handleReset: Function,
+  total: Object
 }
 
 class Trips extends Component {
+  state: {
+    cost: string,
+    time: string,
+    transport: string,
+    stops: string,
+  };
+
   constructor(props: Props) {
-    super(props)
+    super(props);
+
+    this.state = {
+      cost: '',
+      time: '',
+      transport: '',
+      stops: '',
+    }
+  }
+
+  componentWillMount() {
+    const { total, currency } = this.props;
+
+    const cost = `${total.cost} ${currency}`;
+
+    const time = (() => {
+      let h = '';
+      let m = '';
+      const data = total.time;
+      h = data.h && data.h > 1 ? `${data.h} hours` : `${data.h} hour`;
+      m = data.m && data.m > 1 ? ` ${data.m} minutes` : ` ${data.m} minute`;
+      return h+m;
+    })();
+
+    const transport = (() => {
+      let t = '';
+      let data = total.transport;
+      if (data === 1) {
+        t = data[0]
+      } else {
+        const last = data.pop();
+        t = data.join(', ');
+        t += ` and ${last}`;
+      }
+      return t;
+    })();
+
+    const city = total.stops === 1 ? 'city' : 'cities';
+    const stops = total.stops ? ` through ${total.stops} ${city}` : '';
+
+    this.setState({ cost, time, transport, stops });
   }
 
   render() {
-    const { trips, currency, from, to, type } = this.props;
+    const { trips, currency, from, to } = this.props;
+    const { cost, time, transport, stops } = this.state;
+
     return (
       <div>
-        <TripsResult title={`The ${type} route`}>
+        <TripsResult>
           <p>
-            Your journey from <strong>{from}</strong> to <strong>{to}</strong> will take around <strong>10 hours and 45 minutes</strong> and will cost you <strong>100 EUR</strong>. You'll have to travel by car, train and bus through 4 different cities.
+            Your journey from <strong className="destination">{from}</strong> to <strong className="destination">{to}</strong> will take around <strong>{time}</strong> and will cost you about <strong className="price">{cost}</strong>.
           </p>
+          <p>You'll have to travel by <strong>{transport}</strong>{stops}.</p>
           <p>
-            <Button onClick={this.props.handleReset}>Select new trip</Button> or see the details of your current trip below.
+            <Button bsSize="large" bsStyle="info" onClick={this.props.handleReset}>Select new trip</Button> or see the detailed trip below.
           </p>
         </TripsResult>
         {

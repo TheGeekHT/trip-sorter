@@ -9,6 +9,6 @@ type Props = {
 }
 
 const TripCities = ({ item }: Props) =>
-  <div className="destination">{item.departure} - {item.arrival}</div>
+  <div className="item-destination">{item.departure} - {item.arrival}</div>
 
 export default TripCities
