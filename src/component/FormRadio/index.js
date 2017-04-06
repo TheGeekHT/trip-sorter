@@ -55,7 +55,7 @@ class FormRadio extends Component {
             )
           }
         </ButtonGroup>
-        <input ref="type" type="hidden" value={options[0].value} id="type" />
+        <input ref="type" type="hidden" value={this.state.value} id="type" />
       </FormGroup>
     )
   }
