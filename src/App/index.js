@@ -5,6 +5,8 @@ import './styles.css'
 
 import DataFromServer from '../../api/response.json'
 import PathFinder from '../util/path-finder'
+import createTripRefMap from '../util/create-trip-ref-map'
+import createCitiesList from '../util/create-cities-list'
 
 import Header from '../component/Header'
 import Form from '../component/Form'
@@ -64,33 +66,6 @@ class App extends Component {
     this.parseBestTrip( (new PathFinder(deals, from, to, type)).find() );
   }
 
-  static createTripRefMap(deals: Array<Object>) {
-    let map = {};
-    deals.forEach(item => map[item.reference] = item);
-    return map;
-  }
-
-  static createCitiesList(deals: Array<Object>) {
-    let addedList = [];
-    let list = [];
-
-    const addCity = (city) => {
-      if(addedList.indexOf(city) === -1) {
-        addedList.push(city);
-        list.push(city);
-      }
-    };
-
-    deals.forEach(item => {
-      addCity(item.departure);
-      addCity(item.arrival);
-    });
-
-    list.sort();
-
-    return list;
-  }
-
   // faking API response here
   static fakeApiCall() {
     return {
@@ -100,8 +75,8 @@ class App extends Component {
 
   componentWillMount() {
     const { deals, currency } = this.constructor.fakeApiCall().response; // must be async Promise handler in real conditions
-    const tripRefMap = this.constructor.createTripRefMap(deals);
-    const citiesList = this.constructor.createCitiesList(deals);
+    const tripRefMap = createTripRefMap(deals);
+    const citiesList = createCitiesList(deals);
     this.setState({ deals, tripRefMap, currency, citiesList });
   }
 
