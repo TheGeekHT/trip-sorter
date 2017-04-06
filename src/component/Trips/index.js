@@ -42,15 +42,15 @@ class Trips extends Component {
       let h = '';
       let m = '';
       const data = total.time;
-      h = data.h && data.h > 1 ? `${data.h} hours` : `${data.h} hour`;
-      m = data.m && data.m > 1 ? ` ${data.m} minutes` : ` ${data.m} minute`;
+      if (data.h) h = data.h > 1 ? `${data.h} hours` : `${data.h} hour`;
+      if (data.m) m = data.m > 1 ? ` ${data.m} minutes` : ` ${data.m} minute`;
       return h+m;
     })();
 
     const transport = (() => {
       let t = '';
       let data = total.transport;
-      if (data === 1) {
+      if (data.length === 1) {
         t = data[0]
       } else {
         const last = data.pop();
@@ -67,14 +67,14 @@ class Trips extends Component {
   }
 
   render() {
-    const { trips, currency, from, to } = this.props;
+    const { trips, currency, from, to, type } = this.props;
     const { cost, time, transport, stops } = this.state;
 
     return (
       <div>
         <TripsResult>
           <p>
-            Your journey from <strong className="destination">{from}</strong> to <strong className="destination">{to}</strong> will take around <strong>{time}</strong> and will cost you about <strong className="price">{cost}</strong>.
+            The {type} trip from <strong className="destination">{from}</strong> to <strong className="destination">{to}</strong> will take around <strong>{time}</strong> and will cost you about <strong className="price">{cost}</strong>.
           </p>
           <p>
             You'll have to travel by <strong>{transport}</strong>{stops}.

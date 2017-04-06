@@ -25,15 +25,10 @@ class App extends Component {
       tripRefMap: {},
       currency: '',
       citiesList: [],
-      trips: [
-        DataFromServer.deals[0],
-        DataFromServer.deals[12],
-        DataFromServer.deals[34],
-        DataFromServer.deals[100],
-      ],
-      from: 'London',
-      to: 'Kiev',
-      type: 'fastest',
+      trips: [],
+      from: '',
+      to: '',
+      type: '',
       loading: false,
       total: {},
     }
@@ -68,7 +63,8 @@ class App extends Component {
   parseBestTrip(refs: Array<string>) {
     let trips: Array<Object> = [];
     refs.forEach(ref => trips.push(this.state.tripRefMap[ref]));
-    this.setState({ trips, loading: false });
+    let total: Object = getTotalUnits(trips);
+    this.setState({ trips, total, loading: false });
   }
 
   findBestTrip() {
@@ -88,10 +84,6 @@ class App extends Component {
     const tripRefMap = createTripRefMap(deals);
     const citiesList = createCitiesList(deals);
     this.setState({ deals, tripRefMap, currency, citiesList });
-    // fixme
-    let total: Object = getTotalUnits(this.state.trips);
-    this.setState({ total });
-    // fixme end --------------
   }
 
   render() {
