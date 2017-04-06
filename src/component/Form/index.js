@@ -104,7 +104,7 @@ class Form extends Component {
 
     return (
       <form ref='data' onSubmit={this.validate}>
-        <h2>Select your trip</h2>
+        <h2 className="header">Select your trip</h2>
         <FormInput
           controlId="from"
           label="From"

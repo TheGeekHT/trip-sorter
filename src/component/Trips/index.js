@@ -5,6 +5,7 @@ import { Button } from 'react-bootstrap'
 
 import TripsResult from '../TripsResult'
 import Trip from '../Trip'
+import Icon from '../Icon'
 
 type Props = {
   trips: Array<any>,
@@ -79,10 +80,13 @@ class Trips extends Component {
             You'll have to travel by <strong>{transport}</strong>{stops}.
           </p>
           <p>
-            <Button bsSize="large" bsStyle="info" onClick={this.props.handleReset}>Select new trip</Button> or see the detailed trip below.
+            <Button block bsSize="large" bsStyle="info" onClick={this.props.handleReset}>
+              <Icon type="glyphicon glyphicon-repeat"/> SELECT NEW TRIP
+            </Button>
           </p>
         </TripsResult>
         <div className="trip-wrapper">
+          <h2  className="header">Your trip</h2>
           { trips.map((item, index) => <Trip item={item} currency={currency} key={`${item.reference}`} />) }
           <Trip item={trips[trips.length-1]} title={trips[trips.length-1].arrival} currency={currency} />
         </div>
