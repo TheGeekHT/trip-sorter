@@ -1,0 +1,35 @@
+exports[`path finder class check if there is no trips data 1`] = `"No trips data received"`;
+
+exports[`path finder class check wrong departure/arrival city 1`] = `Array []`;
+
+exports[`path finder class get cheapest direct trip 1`] = `
+Array [
+  "BIA0515",
+]
+`;
+
+exports[`path finder class get cheapest trip 1`] = `
+Array [
+  "BKB0600",
+  "BBG0500",
+  "BGM0645",
+  "BMP0530",
+]
+`;
+
+exports[`path finder class get fastest direct trip 1`] = `
+Array [
+  "TIA0330",
+]
+`;
+
+exports[`path finder class get fastest trip 1`] = `
+Array [
+  "CKB0415",
+  "TBG0300",
+  "TGB0300",
+  "TBP0400",
+]
+`;
+
+exports[`path finder class unsupported trip type 1`] = `"Unsupported trip type"`;

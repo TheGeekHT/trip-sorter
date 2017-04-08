@@ -1,0 +1,15 @@
+exports[`get total units helper get proper total values 1`] = `
+Object {
+  "cost": 310,
+  "stops": 2,
+  "time": Object {
+    "h": 17,
+    "m": 30,
+  },
+  "transport": Array [
+    "train",
+    "bus",
+    "car",
+  ],
+}
+`;

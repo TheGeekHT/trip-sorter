@@ -47,10 +47,6 @@ class App extends Component {
     total: Object,
   };
 
-  handleSubmit({ from, to, type }: Object) {
-    this.setState({ from, to, type, loading: true }, this.findBestTrip);
-  }
-
   resetFilter() {
     this.setState({
       trips: [],
@@ -60,16 +56,20 @@ class App extends Component {
     })
   }
 
-  parseBestTrip(refs: Array<string>) {
-    let trips: Array<Object> = [];
-    refs.forEach(ref => trips.push(this.state.tripRefMap[ref]));
-    let total: Object = getTotalUnits(trips);
-    this.setState({ trips, total, loading: false });
+  handleSubmit({ from, to, type }: Object) {
+    this.setState({ from, to, type, loading: true }, this.findBestTrip);
   }
 
   findBestTrip() {
     const { deals, from, to, type } = this.state;
     this.parseBestTrip( (new PathFinder(deals, from, to, type)).find() );
+  }
+
+  parseBestTrip(refs: Array<string>) {
+    let trips: Array<Object> = [];
+    refs.forEach(ref => trips.push(this.state.tripRefMap[ref]));
+    let total: Object = getTotalUnits(trips);
+    this.setState({ trips, total, loading: false });
   }
 
   // faking API response here

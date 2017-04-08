@@ -2,7 +2,7 @@
 
 import PriorityQueue from './priority-queue'
 
-class FindBestTrip {
+class PathFinder {
   deals: Array<Object>;
   from: string;
   to: string;
@@ -18,6 +18,8 @@ class FindBestTrip {
   // build correct Graph for Dijkstra algorithm
   static createVertices(data: Array<Object>, type: string) {
     let vertices: Object = {}; // put all our nodes and weights here
+
+    if (!data) throw new Error('No trips data received');
 
     data.forEach(item => {
       const from: string = item.departure;
@@ -118,4 +120,4 @@ class FindBestTrip {
   }
 }
 
-export default FindBestTrip
+export default PathFinder
