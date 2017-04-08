@@ -1,0 +1,10 @@
+exports[`test trips result should render without crashing 1`] = `
+<div
+  className="result panel panel-info"
+  id={undefined}>
+  <div
+    className="panel-body">
+    Some test goes here
+  </div>
+</div>
+`;

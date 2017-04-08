@@ -1,0 +1,54 @@
+exports[`form error empty should render without crashing 1`] = `
+<div
+  className="panel panel-danger"
+  id={undefined}>
+  <div
+    className="panel-heading">
+    <h2
+      className="panel-title">
+      <i
+        className="glyphicon glyphicon-exclamation-sign" />
+       
+      <strong />
+    </h2>
+  </div>
+  <div
+    className="panel-body">
+    <ul
+      className="errors">
+      
+    </ul>
+  </div>
+</div>
+`;
+
+exports[`form error should render without crashing 1`] = `
+<div
+  className="panel panel-danger"
+  id={undefined}>
+  <div
+    className="panel-heading">
+    <h2
+      className="panel-title">
+      <i
+        className="glyphicon glyphicon-exclamation-sign" />
+       
+      <strong />
+    </h2>
+  </div>
+  <div
+    className="panel-body">
+    <ul
+      className="errors">
+      <li
+        className="error">
+        error 1
+      </li>
+      <li
+        className="error">
+        error 2
+      </li>
+    </ul>
+  </div>
+</div>
+`;
