@@ -2,6 +2,8 @@
 
 import React, { Component } from 'react'
 
+import { capitalize, trim } from '../../util/utils'
+
 import FormInput from '../FormInput'
 import FormRadio from '../FormRadio'
 import FormButton from '../FormButton'
@@ -52,15 +54,13 @@ class Form extends Component {
   }
 
   validate(e: Event) {
-    e.preventDefault();
+    e.preventDefault()
 
     const { citiesList } = this.props;
 
-    const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
-
     const formData = this.refs.data;
-    const from = capitalize(formData.from.value);
-    const to = capitalize(formData.to.value);
+    const from = capitalize(trim(formData.from.value));
+    const to = capitalize(trim(formData.to.value));
     const type = formData.type.value;
 
     let errors = [];
