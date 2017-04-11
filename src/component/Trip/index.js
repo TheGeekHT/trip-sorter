@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react'
 
+import { getCost } from '../../util/utils'
 import Icon from '../Icon'
 
 import './styles.css'
@@ -35,7 +36,7 @@ class Trip extends Component {
     const { item, currency } = this.props;
     const title = this.props.title ? this.props.title : this.props.item.departure;
 
-    const cost = `${item.cost * (1 - (item.discount / 100))} ${currency}`;
+    const cost = `${getCost(item)} ${currency}`;
 
     const time = `${item.duration.h}:${item.duration.m}`;
 

@@ -1,3 +1,7 @@
-export const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase()
+// @flow
 
-export const trim = (str) => str.trim()
+export const capitalize = (str: String) => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase()
+
+export const trim = (str: String) => str.trim()
+
+export const getCost = (item: Object) => +`${item.cost * (1 - (item.discount / 100))}`

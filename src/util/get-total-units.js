@@ -1,5 +1,7 @@
 // @flow
 
+import { getCost } from './utils'
+
 const getTotalUnits = (trips: Array<Object>) => {
   const MINUTES_IN_HOUR = 60;
   let total: Object = {
@@ -14,7 +16,7 @@ const getTotalUnits = (trips: Array<Object>) => {
 
   trips.forEach(item => {
 
-    total.cost += item.cost * (1 - (item.discount / 100));
+    total.cost += getCost(item);
 
     total.time.h += parseInt(item.duration.h, 10);
     total.time.m += parseInt(item.duration.m, 10);
