@@ -3,28 +3,34 @@
 import React from 'react'
 import {
   FormGroup,
-  FormControl,
   ControlLabel,
 } from 'react-bootstrap'
+import { Typeahead } from 'react-bootstrap-typeahead'
 
 type Props = {
   controlId: string,
   placeholder?: string,
   label?: string,
-  value?: string,
   validationState: string,
+  options: Array<string>,
+  autoFocus?: boolean,
 }
 
-const FormInput = ({ controlId, placeholder, label, value, validationState }: Props) =>
+const FormInput = ({ controlId, placeholder, label, validationState, options, autoFocus }: Props) =>
   <FormGroup
     controlId={controlId}
     validationState={validationState}
   >
     <ControlLabel>{label}</ControlLabel>
-    <FormControl
-      type="text"
+    <Typeahead
+      name={controlId}
       placeholder={placeholder}
-      value={value}
+      options={options}
+      minLength={1}
+      maxResults={5}
+      paginate={false}
+      bodyContainer
+      autoFocus={autoFocus}
     />
   </FormGroup>
 

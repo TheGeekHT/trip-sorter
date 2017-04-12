@@ -59,8 +59,8 @@ class Form extends Component {
     const { citiesList } = this.props;
 
     const formData = this.refs.data;
-    const from = capitalize(trim(formData.from.value));
-    const to = capitalize(trim(formData.to.value));
+    const from = capitalize(trim(formData.elements['from'].value));
+    const to = capitalize(trim(formData.elements['to'].value));
     const type = formData.type.value;
 
     let errors = [];
@@ -80,11 +80,11 @@ class Form extends Component {
     }
     if (citiesList.indexOf(from) === -1) {
       validation.from = 0;
-      errors.push(`Invalid departure city. Please select the city from the list: ${citiesList.join(', ')}.`);
+      errors.push(`Invalid departure city.`);
     }
     if (citiesList.indexOf(to) === -1) {
       validation.to = 0;
-      errors.push(`Invalid arrival city. Please select the city from the list: ${citiesList.join(', ')}.`);
+      errors.push(`Invalid arrival city.`);
     }
     if (to === from) {
       validation.from = 0;
@@ -106,14 +106,17 @@ class Form extends Component {
       <form ref='data' onSubmit={this.validate}>
         <h2 className="header">Select your trip</h2>
         <FormInput
+          autoFocus
           controlId="from"
           label="From"
           validationState={this.getValidationState('from')}
+          options={this.props.citiesList}
         />
         <FormInput
           controlId="to"
           label="To"
           validationState={this.getValidationState('to')}
+          options={this.props.citiesList}
         />
         <FormRadio
           options={[
